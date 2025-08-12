@@ -2,6 +2,8 @@ import Spotlight from "@/components/common/Spotlight";
 import MemoryRecorder from "@/components/memories/MemoryRecorder";
 import UploadMemory from "@/components/memories/UploadMemory";
 import MemoryList from "@/components/memories/MemoryList";
+import TextMemory from "@/components/memories/TextMemory";
+import RecipeList from "@/components/recipes/RecipeList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,6 +19,15 @@ const SUGGESTIONS: { title: string; category: Category }[] = [
   { title: "Advice I'd give my younger self", category: "Life Lessons" },
   { title: "A trip that shaped me", category: "Travel" },
   { title: "First job story", category: "Work" },
+]; 
+
+const RECIPE_SUGGESTIONS = [
+  "Grandma's Apple Pie",
+  "Holiday cookies",
+  "Family stew",
+  "Birthday cake",
+  "Comfort soup",
+  "Sunday pasta sauce",
 ];
 
 const Index = () => {
@@ -49,10 +60,11 @@ const Index = () => {
 
       <main className="container mx-auto px-6 pb-20">
         <Tabs value={tab} onValueChange={setTab} className="mt-2">
-          <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-5 w-full">
             <TabsTrigger value="capture">Capture</TabsTrigger>
             <TabsTrigger value="upload">Upload</TabsTrigger>
             <TabsTrigger value="memories">Memories</TabsTrigger>
+            <TabsTrigger value="recipes">Recipes</TabsTrigger>
             <TabsTrigger value="suggestions">Suggestions</TabsTrigger>
           </TabsList>
 
@@ -74,6 +86,32 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="recipes" className="mt-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <TextMemory presetTitle={preset.title} presetCategory="Recipes" />
+              <Card>
+                <CardContent className="p-6">
+                  <div className="font-medium mb-2">Recipe ideas</div>
+                  <div className="grid gap-2">
+                    {RECIPE_SUGGESTIONS.map((t, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setPreset({ title: t, category: "Recipes" })}
+                        className="text-left rounded-md border px-3 py-2 hover:bg-accent/40 transition focus:outline-none focus:ring-2 focus:ring-ring"
+                        aria-label={`Start recipe: ${t}`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="mt-6">
+              <RecipeList />
+            </div>
           </TabsContent>
 
           <TabsContent value="suggestions" className="mt-6">

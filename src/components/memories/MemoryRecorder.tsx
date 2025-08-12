@@ -76,6 +76,7 @@ export default function MemoryRecorder({ presetTitle, presetCategory }: MemoryRe
           createdAt: Date.now(),
           blob,
           durationMs: elapsed,
+          notes,
         });
         toast({ title: "Saved!", description: "Your memory was saved on this device." });
         setIsRecording(false);

@@ -43,6 +43,7 @@ export default function UploadMemory({ presetTitle, presetCategory }: UploadMemo
       createdAt: Date.now(),
       blob,
       fileName: file.name,
+      notes,
     });
     toast({ title: "Uploaded!", description: "Your memory is saved on this device." });
     setFile(null);

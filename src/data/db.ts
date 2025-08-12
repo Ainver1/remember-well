@@ -10,6 +10,7 @@ export type Category =
   | "Travel"
   | "Hobbies"
   | "Life Lessons"
+  | "Recipes"
   | "Other";
 
 export const CATEGORIES: Category[] = [
@@ -22,6 +23,7 @@ export const CATEGORIES: Category[] = [
   "Travel",
   "Hobbies",
   "Life Lessons",
+  "Recipes",
   "Other",
 ];
 
