@@ -22,6 +22,15 @@ export default function TextMemory({ presetTitle, presetCategory }: TextMemoryPr
     if (presetCategory) setCategory(presetCategory);
   }, [presetTitle, presetCategory]);
 
+  useEffect(() => {
+    const handlePresetTitle = (event: CustomEvent) => {
+      setTitle(event.detail);
+    };
+    
+    window.addEventListener('setPresetTitle', handlePresetTitle as EventListener);
+    return () => window.removeEventListener('setPresetTitle', handlePresetTitle as EventListener);
+  }, []);
+
   const save = async () => {
     if (!title.trim() && !content.trim()) return;
     await addMemory({
